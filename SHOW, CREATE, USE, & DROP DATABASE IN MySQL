@@ -1,0 +1,33 @@
+To list available databases:
+
+show databases;
+
+*************************************************************************
+
+The general command for creating a database:
+
+CREATE DATABASE <database_name>;
+
+Example:
+
+CREATE DATABASE book_store;
+
+**************************************************************************
+
+To use a database:
+
+USE <database-name>;
+
+USE book_store;
+
+SELECT DATABASE();
+
+**************************************************************************
+
+To drop a database:
+
+DROP DATABASE <database-name>;
+
+DROP DATABASE book_store;
+
+*****************************************************************************
