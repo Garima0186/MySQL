@@ -1,0 +1,119 @@
+-- CREATE TABLE
+
+CREATE TABLE cats(
+    cat_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    breed VARCHAR(100),
+    age INT);
+
+DESC cats;
+
+
+-- INSERT DATA INTO TABLE
+
+INSERT INTO cats(name,breed,age)
+VALUES('Ringo','Tabby',4),
+      ('Cindy','Maine Coon',10),
+      ('Dumbledore', 'Maine Coon', 11),
+      ('Egg', 'Persian', 4),
+      ('Misty', 'Tabby', 13),
+      ('George Michael', 'Ragdoll', 9),
+      ('Jackson', 'Sphynx', 7);
+
+SELECT * FROM cats;
+
+-- WHERE CLAUSE TO NARROW DOWN THE CHOICES
+
+select name from cats;
+
+select * from cats 
+where age=4;
+
+select name , age from cats
+where age =4;
+
+select * from cats
+where name='egg';
+
+
+SELECT * FROM cats;
+
+SELECT cat_id from cats;
+
+SELECT name, breed from cats;
+
+SELECT name, age FROM cats
+where breed = 'Tabby';
+
+SELECT cat_id , age FROM cats
+WHERE cat_id = age;
+
+SELECT cat_id as id , name from cats;
+
+UPDATE cats
+SET breed='Shorthaired'
+WHERE breed ='tabby';
+
+select* from cats;
+
+select * from cats;
+select * from cats
+where name = 'egg' ;
+
+-- UPDATE DATA INTO THE TABLE 
+
+UPDATE cats
+set name='eggo'
+where name = 'egg';
+
+select * FROM cats;
+
+UPDATE cats
+
+SET name='egg'
+WHERE name ='eggo';
+
+select * from cats;
+
+select * FROM cats;
+
+UPDATE cats
+set name = 'Jack'
+where name= 'Jackson';
+
+SELECT * FROM cats;
+
+UPDATE cats
+set breed= 'British Shorthair'
+where name= 'Ringo';
+
+SELECT * FROM cats;
+
+
+SELECT * FROM cats
+where breed = 'Maine Coon';
+
+UPDATE cats
+SET age=12
+WHERE breed = 'Maine Coon';
+
+-- DELETE DATA FROM THE TABLE AT YOUR REQUIRED ROW OR POSITION WITH WHERE CLAUSE
+
+SELECT * FROM cats;
+SELECT * from cats;
+
+DELETE FROM cats
+WHERE age =4;
+
+SELECT * FROM cats;
+
+DELETE FROM cats
+WHERE age= cat_id;
+
+SELECT * from cats;
+
+delete from cats;
+
+select * from cats;
+
+desc cats;
