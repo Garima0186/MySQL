@@ -1,0 +1,114 @@
+# introduction
+
+# learn about creating databases 
+
+#creating Databases
+
+#within database server we have different databases,all databases have some data,we have multiple databases within MYSQL servers
+
+show databases; #to see databases in server or to list available databases
+
+# how to create new databases
+
+create database pet_shop;
+show databases;
+
+create database SlimeStore;
+show databases;
+
+DROP DATABASE SlimeStore; #removes database entirely
+show databases;
+
+DROP DATABASE pet_shop;
+show databases;
+
+
+USE database newdb;
+SELECT DATABASE();# to insert information to select information we use this
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#create tablename
+#    ( column_name dataype,
+#      column_name datatype);
+
+#how do we know that worked
+
+show tables;
+
+show columns from cats;
+
+desc cats;
+
+# to comment cmmd +/ (forward slash)
+
+#dropping table : how to delete the TABLE, be very careful with it 
+
+drop table cats;
+
+show tables;
+
+
+#comments
+
+# so i can have notes in my code
+# we use -- or command + /
+# to turn of some piece of code turn off
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#creating and dropping your own table
+
+create table pastries(
+                    name varchar(50),
+                    quantity int);
+                    
+show tables;
+
+show columns from pastries;
+
+desc pastries;
+
+drop table pastries;
+
+show tables;
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--Activity
+-- To create new database
+CREATE DATABASE shop; 
+
+
+-- To see what databases are ther in server
+SHOW DATABASES;
+
+--To select the database you wanna work in
+USE shop;
+
+-- To check what database we are currently in
+select database();
+
+--To create table
+CREATE TABLE cloth_shop(
+            brand_name varchar(50),
+            quatity int);
+
+--To see the available tables in that particular database
+show tables;
+
+--To see the column name and there details like datatypes
+show columns from cloth_shop;
+
+desc cloth_shop;
+
+--To drop completely the table
+drop table cloth_shop;
+
+show tables;
+
+select database();
+
+--To drop database
+drop database shop;
+
+show databases;
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
