@@ -1,0 +1,134 @@
+-- Insert basics
+-- insert into table_name(column_1, column_2)
+-- Values("avsjkv",7)
+
+-- create table cats(name varchar(50),
+-- age int);
+
+-- insert into cats(name, age)
+-- values('abc',3),
+-- ('bcd',5),
+-- ('cdf',7);
+
+# get everything from the TABLE or to view all from the table
+-- select * from cats;
+
+-- activity
+-- create table people(first_name varchar(20),
+--                     last_name varchar(20),
+--                     age int);
+                    
+-- insert into people(first_name, last_name, age)
+-- values('tina', 'Belchar',13);
+
+
+-- insert into people(first_name, last_name, age)
+-- values('Linda', 'belchar',45),
+--     ('Phillip','frond',38),
+--     ('calvin','fischoeder',70);
+
+-- select * from people;
+-- Drop table people;
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# working with not null
+
+desc cats;
+
+-- -- null means this is empty
+
+insert into cats(name)
+values('tod');
+
+select * from cats;
+
+--null comes so lets put not null
+
+create table cats2(name varchar(20) not null,
+                age int not null);
+
+insert into cats2(name, age)
+values('tod',1);
+
+desc cats2;
+
+# working with DEFAULT
+
+# escape by \(back slash)
+
+create table cats3(name varchar(20) not null default 'unnamed',
+              age int not null default 99);
+
+
+insert into cats3(name)
+values('max');
+
+
+select * from cats3;
+
+-- display the default value of 99 for age
+
+insert into cats3(name,age)
+values(NULL, NULL);
+
+select * from cats3;
+
+INSERT INTO cats3(age) VALUES(13);
+
+select * from cats3;
+
+
+-- Or a nameless, ageless cat:
+
+INSERT INTO cats3() VALUES();
+select * from cats3;
+
+
+# Primary Keys:
+
+-- some rows are identical to one another 
+-- so we need unique identifier so we can differentiate them
+-- declare primary key for unique identifier
+
+ create table cats4(
+            cat_id int not null primary key,
+            name varchar(50),
+             age int);
+
+
+desc cats4;
+
+# Auto increment : set up auto_increment for automatically increemnt
+-- primary key
+
+create table cats5(
+            cat_id int not null auto_increment primary key,
+             name varchar(50),
+            age int);
+
+desc cats5;
+
+insert into cats5(name, age)
+values('max',3),
+     ('sam',5);
+    
+select * from cats5;
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Column Constraints activity
+
+create table employees(
+            id int auto_increment primary key,
+            last_name varchar(100) not null,
+            first_name varchar(100) not null,
+            middle_name varchar(50),
+            age int not null,
+            current_status varchar(50) not null default 'employed');
+            
+Desc employees;
+
+INSERT INTO employees(first_name, last_name, age)
+Values('thomas','chickenmen',88);
+   
+select * from employees;
