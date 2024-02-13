@@ -1,0 +1,155 @@
+-- constraints
+
+-- unique
+
+-- create table toys(
+--         name varchar(20) unique,
+        
+--         type varchar(20));
+
+-- insert into toys(name, type)
+-- values('abc','soft');
+
+-- select * from toys;
+
+-- insert into toys(name, type)
+-- values('abc','heavy');
+
+-- select * from toys;
+
+-- ------------------------------------------------
+
+-- check
+
+-- create table toys1(
+--       name varchar(20) unique,
+--       toy_quantity int not null check(toy_quantity >=5));
+
+-- desc toys1;
+
+-- insert into toys1(name, toy_quantity)
+-- values('abc',6);
+
+-- select * from toys1;
+
+-- insert into toys1(name, toy_quantity)
+-- values('bhf',3);
+
+-- select * from toys1;
+
+-- ----------------------------------------------------------------
+
+-- changing name of constraint
+
+-- create table toy2(
+--         name varchar(20) not null unique,
+--         toy_quantity int,
+--         constraint ty_n check(toy_quantity >=5));
+
+-- insert into toy2(name, toy_quantity)
+-- values('abc',6);
+
+-- select * from toy2;
+
+-- insert into toy2(name, toy_quantity)
+-- values('ghn',3);
+
+-- select *  from toy2;
+
+-- -----------------------------------------------------------------------
+
+-- ALTER
+
+-- alter table toy2
+-- add column size int;
+
+-- desc toy2;
+
+-- alter table toy2
+-- drop column size;
+
+-- desc toy2;
+
+-- ----------------------------------------------------------------------
+
+-- create table toy3(
+--          name varchar(20) not null unique,
+--          toy_quantity int not null,
+--          sold_quantity int not null,
+--          constraint name_tq check(sold_quantity >= toy_quantity));
+         
+
+-- insert into toy3(name, toy_quantity, sold_quantity)
+-- values('wsd',2,7);
+
+-- insert into toy3(name, toy_quantity, sold_quantity)
+-- values('wsbkj',2,2);
+
+-- insert into toy3(name, toy_quantity, sold_quantity)
+-- values('wsdfde',2,1);
+
+-- select * from toy3;
+-- --------------------------------------------------------------------
+-- rename table and column
+
+-- alter table toy3
+-- rename to toys3;
+
+-- show tables;
+
+-- alter table toys3
+-- add column price int not null;
+
+-- alter table toys3
+-- rename column price to pp;
+
+-- desc toys3;
+
+-- ---------------------------------------------------------------------
+
+-- modify 
+
+-- alter table toys3
+-- modify pp int default '55';
+
+-- desc toys3;
+
+-- alter table toys3
+-- change pp pt float;
+
+desc toys3;
+
+
+-- -----------------------------------------------------------------------
+
+-- alter constraints
+
+
+alter table toys3
+drop constraint name_tq;
+
+alter table toys3
+add constraint sold_quant check(sold_quantity >=1);
+
+alter table toys3
+add constraint name_c check(name != 'vdf');
+
+
+-- ------------------------------------------------------------------------
+
+
+create table palindrom(
+        word varchar(20) not null,
+        constraint not_a_palindrome check(reverse(word)= word));
+
+insert into palindrom(word)
+values('carrac');
+
+
+select * from palindrom;
+
+insert into palindrom(word)
+values('mommy');
+
+
+-- ------------------------------------------------------------------
