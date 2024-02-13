@@ -1,0 +1,53 @@
+#date math : calculate how many days
+
+-- datediff(exp1, exp2)
+
+select birthdate from people;
+
+select curdate() from people;
+
+select datediff(curdate(), birthdate)
+from people;
+
+
+-- date add(date, interval, expr unit), date_sub
+
+SELECT date_add(curdate(), interval 1 month);
+
+-- timediff(), addtime(), subtime()
+
+select datediff(curdate(), '10:00:00');
+
+-- timestamps : it stores less space 
+-- it is date and time
+
+-- default and on 
+
+create table captions(
+    text varchar(50),
+    created_at timestamp default CURRENT_timestamp);
+    
+insert into captions(text)
+values('beautiful'),
+('value');
+
+select * from captions;
+
+create table captions2(
+    text varchar(50),
+    created_at timestamp default CURRENT_timestamp,
+    updated_at timestamp on update CURRENT_timestamp );
+
+
+
+
+
+insert into captions2(text)
+values('beautiful'),
+('value');
+
+select * from captions2;
+
+update captions2
+set text='HI'
+where text ='value';
