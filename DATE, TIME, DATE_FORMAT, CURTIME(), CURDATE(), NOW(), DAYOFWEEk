@@ -1,0 +1,65 @@
+-- create table people(
+--     name VARCHAR(50),
+--     birthdate DATE,
+--     birthtime TIME,
+--     birthdt datetime);
+
+-- insert into people(name, birthdate, birthtime, birthdt)
+-- values('Alex','1996-08-19','12:02:02','1996-08-19 12:02:02');
+
+select * from people;
+
+INSERT INTO people (name, birthdate, birthtime, birthdt)
+VALUES ('Elton', '2000-12-25', '11:00:00', '2000-12-25 11:00:00');
+ 
+INSERT INTO people (name, birthdate, birthtime, birthdt)
+VALUES ('Lulu', '1985-04-11', '9:45:10', '1985-04-11 9:45:10');
+ 
+INSERT INTO people (name, birthdate, birthtime, birthdt)
+VALUES ('Juan', '2020-08-15', '23:59:00', '2020-08-15 23:59:00');
+
+-- curdate(), curtime(), now()
+
+select curtime();
+
+select curdate();
+
+select now(); -- current_timestamp()
+
+INSERT INTO people (name, birthdate, birthtime, birthdt)
+VALUES ('Hazel', curdate(), curtime(),now());
+
+-- date functions ( formating or extracting date)
+
+SELECT birthdate from people;
+
+-- Day() day of the month
+
+select birthdate, day(birthdate)
+from people;
+
+-- day of week : for birth UPDATE
+
+select birthdate, day(birthdate), dayofweek(birthdate)
+from people;
+
+select birthdate, day(birthdate), dayofweek(birthdate), dayofyear(birthdate)
+from people;
+
+
+--- month
+
+select birthdate, monthname(birthdate)
+from people;
+
+select name,birthdt,year(birthdt), monthname(birthdt)
+from people;
+
+-- time functions
+
+select name, birthtime, minute(birthtime)
+from people;
+
+
+select birthdt, hour(birthdt)
+from people;
