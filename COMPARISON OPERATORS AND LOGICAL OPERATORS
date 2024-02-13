@@ -1,0 +1,46 @@
+select title , released_year
+from books
+where released_year < 1980;
+
+select title, author_lname
+from books
+where author_lname ='Eggers'
+OR author_lname = 'Chabon';
+
+select title, released_year
+from books
+where author_lname ='Lahiri'
+AND released_year > 2000;
+
+select title, pages
+from books
+where pages between 100 and 200;
+
+select title, author_lname
+from books
+where author_lname like 'C%'
+OR author_lname Like 'S%';
+
+select title,author_lname,
+  CASE 
+     WHEN title LIKE '%stories%' THEN 'Short Stories'
+     WHEN title = 'Just Kids' THEN 'Memoir'
+     WHEN title = 'A Heartbreaking Work of Staggering Genius' THEN 'Memior'
+     ELSE 'Novel'
+  END as type
+From books;
+
+
+select author_fname, author_lname,
+    case
+       when count(*) >1 then concat(count(*),' ','books')
+       else concat(count(*),' ','book')
+    end
+from books
+where author_lname is not null
+group by author_lname, author_fname;
+
+
+
+
+
