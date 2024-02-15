@@ -1,0 +1,40 @@
+-- having( to filter groups we get from group by)
+-- where ( is started with begin )
+
+select * from full_reviews;
+
+select title, 
+    AVG(rating), 
+    count(rating) as review_count
+from full_reviews
+group by title HAVING count(rating) >1;
+
+
+select title, 
+    AVG(rating)
+from full_reviews
+where title ='Archer'
+group by title;
+
+
+--  group by roll up ( super- aggregate summary)
+
+select title,AVG(rating) 
+from full_reviews
+group by title;
+
+select title,AVG(rating) 
+from full_reviews
+group by title with rollup;
+
+
+select released_year,genre, AVG(rating) 
+from full_reviews
+group by released_year, genre with rollup;
+
+-- SQL Modes( affect syntax and data validation)
+
+select @@GLOBAL.sql_mode;
+
+select @@SESSION.sql_mode;
+
