@@ -75,3 +75,121 @@ INSERT INTO reviews(series_id, reviewer_id, rating) VALUES
  
  select * from reviews;
 
+select title, rating
+from series
+join reviews
+on series.id =reviews.series_id;
+
+select title, round(avg(rating),2) as avg_rating
+from series
+join reviews
+ON series.id= reviews.series_id
+group by title 
+order by avg_rating;
+
+
+select first_name, last_name, rating
+from reviewers
+join reviews
+on reviewers.id=reviews.reviewer_id;
+
+select title as unreviewed_Series 
+from series
+left join reviews
+on reviews.series_id= series.id
+where rating IS NULL;
+
+
+select first_name,
+        last_name,
+        count(*) AS COUNT,
+        IFNULL(min(rating),0) as MIN,
+        IFNULL(max(rating),0) AS MAX,
+        ROUND(IFNULL(AVG(rating),0),2) AS AVG,
+        CASE
+         when AVG(rating)>1 THEN 'Active'
+         ELSE 'Inactive'
+        END AS 'Status'
+        
+from reviewers
+JOIN reviews
+ON reviewers.id=reviews.reviewer_id
+group by first_name, last_name;
+
+
+-- USING IF 
+SELECT 
+    first_name,
+    last_name,
+    COUNT(rating) AS count,
+    IFNULL(MIN(rating), 0) AS min,
+    IFNULL(MAX(rating), 0) AS max,
+    ROUND(IFNULL(AVG(rating), 0), 2) AS average,
+    IF(COUNT(rating) > 0,
+        'ACTIVE',
+        'INACTIVE') AS status
+FROM
+    reviewers
+        LEFT JOIN
+    reviews ON reviewers.id = reviews.reviewer_id
+GROUP BY first_name , last_name;
+
+
+-- 2 joins
+
+select title,
+    rating, 
+    concat(first_name, ' ', last_name) as reviewer
+from reviews
+
+join series on series.id = reviews.series_id
+join reviewers on reviewers.id = reviews.reviewer_id
+order by title;
+
+-- views: are stored queries , we save the query, it treat the query as a table
+
+SELECT 
+    title, released_year, genre, rating, first_name, last_name
+FROM
+    reviews
+        JOIN
+    series ON series.id = reviews.series_id
+        JOIN
+    reviewers ON reviewers.id = reviews.reviewer_id;
+    
+CREATE VIEW full_reviews AS
+SELECT title, released_year, genre, rating, first_name, last_name FROM reviews
+JOIN series ON series.id = reviews.series_id
+JOIN reviewers ON reviewers.id = reviews.reviewer_id;
+
+SELECT * FROM full_reviews;
+
+-- updateable views(only some views are updateable)/ it is virtual TABLE
+
+delete from full_reviews 
+WHERE released_year =2010;
+
+CREATE VIEW ordered_series AS
+SELECT * FROM series ORDER BY released_year;;
+
+-- change views
+
+CREATE OR REPLACE VIEW ordered_series AS
+SELECT * FROM series ORDER BY released_year DESC;
+
+ALTER VIEW ordered_series AS
+SELECT * FROM series ORDER BY released_year;
+
+DROP VIEW ordered_series;
+
+
+
+
+
+
+
+
+
+
+
+
