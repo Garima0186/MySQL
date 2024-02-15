@@ -1,0 +1,67 @@
+create table students(
+        student_id int primary key auto_increment,
+        first_name varchar(50));
+        
+create table papers(
+        papers_id int primary key auto_increment,
+        title varchar(50),
+        grade int,
+        student_id int,
+        foreign key(student_id) references students(student_id) on delete cascade);
+        
+INSERT INTO students (first_name) VALUES 
+('Caleb'), ('Samantha'), ('Raj'), ('Carlos'), ('Lisa');
+ 
+INSERT INTO papers (student_id, title, grade ) VALUES
+(1, 'My First Book Report', 60),
+(1, 'My Second Book Report', 75),
+(2, 'Russian Lit Through The Ages', 94),
+(2, 'De Montaigne and The Art of The Essay', 98),
+(4, 'Borges and Magical Realism', 89);
+
+select * from students;
+
+select * from papers;
+
+
+select first_name, title, grade 
+from students
+JOIN papers 
+on students.student_id = papers.student_id
+order by grade desc;
+
+select first_name, title, grade 
+from students
+LEFT JOIN papers 
+on students.student_id = papers.student_id;
+
+
+select first_name,IFNULL(title,'Missing'), ifnull(grade,0)
+from students
+LEFT JOIN papers 
+on students.student_id = papers.student_id;
+
+
+select first_name,AVG(grade)
+from students
+LEFT JOIN papers 
+on students.student_id = papers.student_id
+group by first_name
+order by AVG(grade) DESC;
+
+
+select first_name,AVG(grade) as average,
+    case when AVG(grade) >70 Then 'Passing'
+         else 'failing'
+    end as 'passing_status'
+from students
+LEFT JOIN papers 
+on students.student_id = papers.student_id
+group by first_name
+order by AVG(grade) DESC;
+
+
+
+
+
+
