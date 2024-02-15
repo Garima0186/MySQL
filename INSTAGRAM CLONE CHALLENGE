@@ -1,0 +1,103 @@
+-- Instagram clone challange 1
+
+-- Finding 5 oldest users 
+
+desc users;
+
+select username, created_at
+from users
+order by created_at limit 5;
+
+
+-- Instagram clone challange 2
+
+-- most population registration date
+
+select 
+       dayname(created_at) as day,
+       count(*)
+from users
+group by day
+order by count(*) desc
+limit 2;
+
+-- Instagram clone challange 3
+
+-- Identify Inactive users
+
+desc users;
+
+desc photos;
+
+desc follows;
+
+desc  comments;
+
+desc  likes;
+
+desc  tags;
+
+desc photo_tags;
+
+
+select username ,image_url
+from users
+left join photos 
+on photos.user_id = users.id
+where image_url is null;
+
+-- -- Instagram clone challange 4
+
+-- identify most popular photo and user who created it
+
+
+select username,
+        photos.id ,
+        photos.image_url,
+        count(*) as total
+from users 
+join likes
+on likes.user_id= users.id
+join photos
+on photos.user_id = users.id
+group by photos.id
+order by total desc
+LIMIT 1;
+
+
+-- -- Instagram clone challange 5
+
+-- calculate average number of photos per user
+
+
+SELECT (SELECT Count(*) 
+        FROM   photos) / (SELECT Count(*) 
+                          FROM   users) AS avg; 
+
+
+
+
+ -- Instagram clone challange 6
+ 
+ 
+select tags.tag_name,
+       count(*) as total
+from photo_tags
+join tags
+on photo_tags.tag_id= tags.id
+group by tags.id
+order by total desc
+limit 5;
+
+
+ -- Instagram clone challange 7
+
+
+select username,
+        count(*) as total
+from users
+join likes
+on likes.user_id = users.id
+group by username;
+having total = (select count(*) from photos);
+
