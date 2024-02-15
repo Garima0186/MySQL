@@ -1,0 +1,90 @@
+use shop;
+
+select database();
+
+create table  customers(
+        id int primary key auto_increment,
+        f_name varchar(50),
+        l_name varchar(50),
+        email varchar(50));
+        
+create table  orders(
+        order_id int primary key auto_increment,
+        order_date DATE,
+        amount decimal(8,2),
+        customer_id INT,
+        foreign key(customer_id) REFERENCES customers(id));
+        
+        
+INSERT INTO customers (f_name, l_name, email) 
+VALUES ('Boy', 'George', 'george@gmail.com'),
+       ('George', 'Michael', 'gm@gmail.com'),
+       ('David', 'Bowie', 'david@gmail.com'),
+       ('Blue', 'Steele', 'blue@gmail.com'),
+       ('Bette', 'Davis', 'bette@aol.com');
+       
+       
+INSERT INTO orders (order_date, amount, customer_id)
+VALUES ('2016-02-10', 99.99, 1),
+       ('2017-11-11', 35.50, 1),
+       ('2014-12-12', 800.67, 2),
+       ('2015-01-03', 12.50, 2),
+       ('1999-04-11', 450.25, 5);
+       
+select * from customers;
+
+select * from orders;
+
+-- cross join
+
+select * from customers, orders;
+
+-- join / inner join ( where a and b join and we take only the data which is joined )
+
+SELECT * FROM customers
+JOIN orders ON orders.customer_id = customers.id;
+ 
+SELECT f_name, l_name, order_date, amount FROM customers
+JOIN orders ON orders.customer_id = customers.id;
+
+-- inner join with group BY
+
+SELECT f_name, l_name,SUM(amount) as total
+FROM customers
+JOIN orders ON orders.customer_id = customers.id
+GROUP BY f_name, l_name
+order by total;
+
+-- left join ( select everything from a along with any matching records in B)
+-- everything from the left side and overlap of other side
+-- if we wanna know the user never did anything or placed orders
+
+SELECT f_name, l_name,order_date
+FROM customers
+LEFT JOIN orders 
+ON orders.customer_id = customers.id;
+
+
+-- Left  join with group BY (IFNULL)
+
+SELECT f_name, l_name, ifnull(SUM(amount),0) as money_spent
+from customers
+LEFT JOIN orders 
+ON orders.customer_id = customers.id
+group by f_name, l_name
+order by money_spent;
+
+
+-- right join ( select everything from B along with and matching record in A)
+
+SELECT f_name, l_name,order_date, amount
+FROM customers
+RIGHT JOIN orders 
+ON orders.customer_id = customers.id;
+
+-- delete cascade( to add something on schema)
+
+delete from customers 
+where l_name= 'George'
+
+-- on delete cascade
